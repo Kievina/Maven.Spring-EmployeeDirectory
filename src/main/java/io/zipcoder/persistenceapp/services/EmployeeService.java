@@ -5,11 +5,7 @@ import io.zipcoder.persistenceapp.models.Employee;
 import io.zipcoder.persistenceapp.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ResourceNotFoundException;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
 
 @Service
 public class EmployeeService {
@@ -33,31 +29,18 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    //Update employee to set new manager
-    public Boolean updateEmployeeManager(Long employeeNumber, Employee newManager) {
+    //Update employee to set new manager and other fields
+    public Boolean updateEmployeeManager(Long employeeNumber, Employee newEmployeeInfo) {
         try {
             verifyEmployee(employeeNumber);
             Employee employeeToUpdate = employeeRepository.findOne(employeeNumber);
-            employeeToUpdate.setManager(newManager);
-            employeeRepository.save(employeeToUpdate);
-            return true;
-        } catch (ResourceNotFoundException ex) {
-            return false;
-        }
-    }
-
-    //Update other employee fields
-    public Boolean updateEmployee(Long employeeNumber, Employee newEmployeeInfo) {
-        try {
-            verifyEmployee(employeeNumber);
-            Employee employeeToUpdate = findEmployeeById(employeeNumber);
+            employeeToUpdate.setManager(newEmployeeInfo.getManager());
             employeeToUpdate.setFirstName(newEmployeeInfo.getFirstName());
             employeeToUpdate.setLastName(newEmployeeInfo.getLastName());
             employeeToUpdate.setTitle(newEmployeeInfo.getTitle());
             employeeToUpdate.setPhoneNumber(newEmployeeInfo.getPhoneNumber());
             employeeToUpdate.setEmail(newEmployeeInfo.getEmail());
             employeeToUpdate.setHireDate(newEmployeeInfo.getHireDate());
-            employeeToUpdate.setDepartmentNumber(newEmployeeInfo.getEmployeeNumber());
             employeeRepository.save(employeeToUpdate);
             return true;
         } catch (ResourceNotFoundException ex) {

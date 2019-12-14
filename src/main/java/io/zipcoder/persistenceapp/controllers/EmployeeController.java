@@ -37,18 +37,8 @@ public class EmployeeController {
     //Update employee to set new manager
     //PUT
     @PutMapping("/API/{employeeNumber}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long employeeNumber, @RequestBody Employee newManager) {
-        if (employeeService.updateEmployeeManager(employeeNumber, newManager))
-            return new ResponseEntity<>(HttpStatus.OK);
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    //Update other employee fields
-    //PUT
-    @PutMapping("/API/{employeeNumber}")
-    public ResponseEntity<Employee> updateEmployeeManager(@PathVariable Long employeeNumber, @RequestBody Employee newEmployee) {
-        if (employeeService.updateEmployee(employeeNumber, newEmployee))
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long employeeNumber, @RequestBody Employee updatedEmployee) {
+        if (employeeService.updateEmployeeManager(employeeNumber, updatedEmployee))
             return new ResponseEntity<>(HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
