@@ -19,13 +19,13 @@ public class Employee {
     private String phoneNumber;
     private String email;
     private Date hireDate;
-    private Manager manager;
+    private Employee manager;
     @OneToMany
     private Long departmentNumber;
 
     public Employee() {}
 
-    public Employee(String firstName, String lastName, String title, String phoneNumber, String email, Date hireDate, Manager manager, Long departmentNumber) {
+    public Employee(String firstName, String lastName, String title, String phoneNumber, String email, Date hireDate, Employee manager, Long departmentNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.title = title;
@@ -38,10 +38,6 @@ public class Employee {
 
     public Long getEmployeeNumber() {
         return employeeNumber;
-    }
-
-    public void setEmployeeNumber(Long employeeNumber) {
-        this.employeeNumber = employeeNumber;
     }
 
     public String getFirstName() {
@@ -92,11 +88,11 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
-    public Manager getManager() {
+    public Employee getManager() {
         return manager;
     }
 
-    public void setManager(Manager manager) {
+    public void setManager(Employee manager) {
         this.manager = manager;
     }
 
